@@ -1,0 +1,63 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+struct QNode {
+  int data;
+  QNode* next;
+  QNode(int d)
+  {
+    data = d;
+    next = NULL;
+  }
+};
+
+struct Queue {
+  QNode *f, *r;
+  Queue()
+  {
+    f = r = NULL;
+  }
+
+  void enQueue(int x)
+  {
+    QNode* temp = new QNode(x);
+
+    if (r == NULL) {
+      f = r = temp;
+      return;
+    }
+
+    r->next = temp;
+    r = temp;
+  }
+
+  void deQueue()
+  {
+    if (f == NULL)
+      return;
+    QNode* temp = f;
+    f = f->next;
+
+    if (f == NULL)
+      r = NULL;
+
+    delete (temp);
+  }
+};
+
+int main()
+{
+
+  Queue q;
+  q.enQueue(1);
+  q.enQueue(4);
+  q.deQueue();
+  q.deQueue();
+  q.enQueue(3);
+  q.enQueue(2);
+  q.enQueue(31);
+  q.deQueue();
+  cout << "Queue Front : " << (q.f)->data << endl;
+  cout << "Queue Rear : " << (q.r)->data;
+}
+
